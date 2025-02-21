@@ -1,4 +1,4 @@
-# Student Database: Part 1
+# Student Management Database
 
 This is a PostgreSQL database designed to manage student information, courses, majors, and the relationships between them. It was created as part of a FreeCodeCamp project to demonstrate database design and SQL skills.
 
@@ -44,11 +44,66 @@ The database consists of the following tables:
 
 ---
 
-## Sample Data
+## Setup Instructions
 
-The database is pre-populated with sample data for testing and demonstration purposes.
+### Prerequisites
+1. **PostgreSQL**: Ensure PostgreSQL is installed on your system. You can download it from [here](https://www.postgresql.org/download/).
+2. **CSV Files**: Ensure you have the following files in the project directory:
+   - `students.csv`: Contains student data.
+   - `courses.csv`: Contains course data.
+3. **Bash Script**: Ensure you have the `insert_data.sh` script in the project directory.
 
-### Example Queries
+### Steps to Set Up the Database
+
+1. **Create the Database**:
+   - Open your terminal and connect to PostgreSQL:
+     ```bash
+     sudo -u postgres psql
+     ```
+   - Create the `students` database:
+     ```sql
+     CREATE DATABASE students;
+     ```
+   - Exit the PostgreSQL prompt:
+     ```sql
+     \q
+     ```
+
+2. **Run the SQL Script**:
+   - Use the provided SQL script to create the tables and schema:
+     ```bash
+     psql -U your_username -d students -f path/to/your_sql_file.sql
+     ```
+     Replace `your_username` with your PostgreSQL username and `path/to/your_sql_file.sql` with the path to your SQL file.
+
+3. **Populate the Database with CSV Data**:
+   - Ensure the `students.csv` and `courses.csv` files are in the same directory as the `insert_data.sh` script.
+   - Make the script executable:
+     ```bash
+     chmod +x insert_data.sh
+     ```
+   - Run the script to insert data from the CSV files into the database:
+     ```bash
+     ./insert_data.sh
+     ```
+     The script should:
+     - Connect to the `students` database.
+     - Use `COPY` or `\copy` commands to load data from `students.csv` and `courses.csv` into the respective tables.
+
+4. **Verify the Data**:
+   - Connect to the `students` database:
+     ```bash
+     psql -U your_username -d students
+     ```
+   - Run a query to check if the data was inserted correctly:
+     ```sql
+     SELECT * FROM students;
+     SELECT * FROM courses;
+     ```
+
+---
+
+## Example Queries
 
 1. **List all students with their majors:**
    ```sql
@@ -73,25 +128,6 @@ The database is pre-populated with sample data for testing and demonstration pur
    JOIN majors m ON s.major_id = m.major_id
    GROUP BY m.major;
    ```
-
----
-
-## Setup Instructions
-
-1. **Prerequisites**:
-   - Ensure you have PostgreSQL installed on your system.
-
-2. **Create the Database**:
-   - Run the provided SQL script to create the database and populate it with sample data:
-     ```bash
-     psql -U your_username -f path/to/your_sql_file.sql
-     ```
-
-3. **Connect to the Database**:
-   - Use the following command to connect to the `students` database:
-     ```bash
-     psql -U your_username -d students
-     ```
 
 ---
 
