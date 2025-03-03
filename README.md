@@ -1,4 +1,4 @@
-# Student Management Database
+# Student Database Part 1
 
 This is a PostgreSQL database designed to manage student information, courses, majors, and the relationships between them. It was created as part of a FreeCodeCamp project to demonstrate database design and SQL skills.
 
